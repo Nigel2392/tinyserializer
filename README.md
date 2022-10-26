@@ -33,24 +33,23 @@ Easily shrink your data by using GZIP compression. It's disabled by default, but
 ### Example:
 Create a serializer like so:
 ```go
-  var err error
-	s := NewSerializer()
-	s, err = s.SetCompress(true)
-	if err != nil {
-		panic(err)
-	}
-  data := s.Serialize(&mystruct) // Serialized data
+var err error
+s := NewSerializer()
+s, err = s.SetCompress(true)
+if err != nil {
+	panic(err)
+}
+data := s.Serialize(&mystruct) // Serialized data
 ```
 
 And deserialize it like so:
 ```go
-	deserialized := MyStruct{}
-	s = NewSerializer()
-	s.SetData(serialized)
-	s = s.SetCompress(true)
-  s.Deserialize(serialized, &deserialized)
-	if err != nil {
-		panic(err)
-	}
-
+deserialized := MyStruct{}
+s = NewSerializer()
+s.SetData(serialized)
+s = s.SetCompress(true)
+s.Deserialize(serialized, &deserialized)
+if err != nil {
+	panic(err)
+}
 ```
