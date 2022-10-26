@@ -4,7 +4,7 @@
 As the title says, the package is not that big. It's written with about 500 lines of code, and only works on structs.
 It does not work on slices, maps or other types by themselves. It needs a struct to work on.
 ```go
-type TestStruct{
+type TestStruct struct {
 	ListMapStruct []map[int]*AllStruct `tiny:"listmapstruct"`
 	BoolField     bool                 `tiny:"boolfield"`
 	IntField      int64                `tiny:"intfield"`
