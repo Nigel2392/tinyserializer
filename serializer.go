@@ -179,22 +179,15 @@ func (s *Serializer) serializeMapFields(value reflect.Value) error {
 	// Loop through all fields
 	for numFields.Next() {
 		// Get the field
-		key := numFields.Key()
-		field := numFields.Value()
-
 		// Serialize the field
-		err := s.serializeField(key)
-		if err != nil {
+		if err := s.serializeField(numFields.Key()); err != nil {
 			return fmt.Errorf("failed to serialize field: " + err.Error())
 		}
-
 		// Serialize the field
-		err = s.serializeField(field)
-		if err != nil {
+		if err := s.serializeField(numFields.Value()); err != nil {
 			return fmt.Errorf("failed to serialize field: " + err.Error())
 		}
 	}
-
 	return nil
 }
 
@@ -361,7 +354,6 @@ func (s *Serializer) deserializeSlice(field reflect.Value) error {
 
 	// Create a new slice
 	field.Set(reflect.MakeSlice(field.Type(), int(length), int(length)))
-
 	// Loop through all elements
 	for j := 0; j < int(length); j++ {
 		// Deserialize the element

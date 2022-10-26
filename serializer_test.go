@@ -239,10 +239,16 @@ func TestSerializer(t *testing.T) {
 		if all_s.StringField != testStruct.All.StringField {
 			t.Fatal("string field is not equal to the original")
 		}
+		if len(all_s.ListBool) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for i, v := range all_s.ListBool {
 			if v != testStruct.All.ListBool[i] {
 				t.Fatal("list bool field is not equal to the original")
 			}
+		}
+		if len(all_s.ListInt) < 1 {
+			t.Fatal("All struct is not complete.")
 		}
 		for i, v := range all_s.ListInt {
 			if v != testStruct.All.ListInt[i] {
@@ -250,42 +256,63 @@ func TestSerializer(t *testing.T) {
 			}
 		}
 
+		if len(all_s.ListFloat) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for i, v := range all_s.ListFloat {
 			if v != testStruct.All.ListFloat[i] {
 				t.Fatal("list float field is not equal to the original")
 			}
 		}
 
+		if len(all_s.ListString) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for i, v := range all_s.ListString {
 			if v != testStruct.All.ListString[i] {
 				t.Fatal("list string field is not equal to the original")
 			}
 		}
 
+		if len(all_s.MapBool) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for k, v := range all_s.MapBool {
 			if v != testStruct.All.MapBool[k] {
 				t.Fatal("map bool field is not equal to the original")
 			}
 		}
 
+		if len(all_s.MapInt) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for k, v := range all_s.MapInt {
 			if v != testStruct.All.MapInt[k] {
 				t.Fatal("map int field is not equal to the original")
 			}
 		}
 
+		if len(all_s.MapFloat) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for k, v := range all_s.MapFloat {
 			if v != testStruct.All.MapFloat[k] {
 				t.Fatal("map float field is not equal to the original")
 			}
 		}
 
+		if len(all_s.MapString) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for k, v := range all_s.MapString {
 			if v != testStruct.All.MapString[k] {
 				t.Fatal("map string field is not equal to the original")
 			}
 		}
 
+		if len(all_s.MapListBool) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for k, v := range all_s.MapListBool {
 			for i, vv := range v {
 				if vv != testStruct.All.MapListBool[k][i] {
@@ -294,6 +321,9 @@ func TestSerializer(t *testing.T) {
 			}
 		}
 
+		if len(all_s.MapListInt) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for k, v := range all_s.MapListInt {
 			for i, vv := range v {
 				if vv != testStruct.All.MapListInt[k][i] {
@@ -302,6 +332,9 @@ func TestSerializer(t *testing.T) {
 			}
 		}
 
+		if len(all_s.MapListFloat) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for k, v := range all_s.MapListFloat {
 			for i, vv := range v {
 				if vv != testStruct.All.MapListFloat[k][i] {
@@ -310,6 +343,9 @@ func TestSerializer(t *testing.T) {
 			}
 		}
 
+		if len(all_s.MapListString) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for k, v := range all_s.MapListString {
 			for i, vv := range v {
 				if vv != testStruct.All.MapListString[k][i] {
@@ -318,6 +354,9 @@ func TestSerializer(t *testing.T) {
 			}
 		}
 
+		if len(all_s.ListMapBool) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for i, v := range all_s.ListMapBool {
 			for k, vv := range v {
 				if vv != testStruct.All.ListMapBool[i][k] {
@@ -326,6 +365,9 @@ func TestSerializer(t *testing.T) {
 			}
 		}
 
+		if len(all_s.ListMapInt) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for i, v := range all_s.ListMapInt {
 			for k, vv := range v {
 				if vv != testStruct.All.ListMapInt[i][k] {
@@ -334,6 +376,9 @@ func TestSerializer(t *testing.T) {
 			}
 		}
 
+		if len(all_s.ListMapFloat) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for i, v := range all_s.ListMapFloat {
 			for k, vv := range v {
 				if vv != testStruct.All.ListMapFloat[i][k] {
@@ -342,6 +387,9 @@ func TestSerializer(t *testing.T) {
 			}
 		}
 
+		if len(all_s.ListMapString) < 1 {
+			t.Fatal("All struct is not complete.")
+		}
 		for i, v := range all_s.ListMapString {
 			for k, vv := range v {
 				if vv != testStruct.All.ListMapString[i][k] {
@@ -353,21 +401,25 @@ func TestSerializer(t *testing.T) {
 		t.Fatal("deserialized struct is not equal to the original")
 	}
 	if deserialized.ListMapStruct != nil {
-		for i, v := range deserialized.ListMapStruct {
-			for k, vv := range v {
-				if vv.BoolField != testStruct.ListMapStruct[i][k].BoolField {
-					t.Fatal("list map struct bool field is not equal to the original")
-				}
-				if vv.IntField != testStruct.ListMapStruct[i][k].IntField {
-					t.Fatal("list map struct int field is not equal to the original")
-				}
-				if vv.FloatField != testStruct.ListMapStruct[i][k].FloatField {
-					t.Fatal("list map struct float field is not equal to the original")
-				}
-				if vv.StringField != testStruct.ListMapStruct[i][k].StringField {
-					t.Fatal("list map struct string field is not equal to the original")
+		if len(deserialized.ListMapStruct) == len(testStruct.ListMapStruct) {
+			for i, v := range deserialized.ListMapStruct {
+				for k, vv := range v {
+					if vv.BoolField != testStruct.ListMapStruct[i][k].BoolField {
+						t.Fatal("list map struct bool field is not equal to the original")
+					}
+					if vv.IntField != testStruct.ListMapStruct[i][k].IntField {
+						t.Fatal("list map struct int field is not equal to the original")
+					}
+					if vv.FloatField != testStruct.ListMapStruct[i][k].FloatField {
+						t.Fatal("list map struct float field is not equal to the original")
+					}
+					if vv.StringField != testStruct.ListMapStruct[i][k].StringField {
+						t.Fatal("list map struct string field is not equal to the original")
+					}
 				}
 			}
+		} else {
+			t.Fatal("list map struct is not equal to the original")
 		}
 	} else {
 		t.Fatal("deserialized struct is not equal to the original")
