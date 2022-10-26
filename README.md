@@ -4,6 +4,7 @@
 As the title says, the package is not that big. It's written with about 500 lines of code, and only works on structs.
 It does not work on slices, maps or other types by themselves. It needs a struct to work on.
 ```go
+type TestStruct{
 	ListMapStruct []map[int]*AllStruct `tiny:"listmapstruct"`
 	BoolField     bool                 `tiny:"boolfield"`
 	IntField      int64                `tiny:"intfield"`
@@ -25,6 +26,7 @@ It does not work on slices, maps or other types by themselves. It needs a struct
 	ListMapInt    []map[int]int64      `tiny:"listmapint"`
 	ListMapFloat  []map[int]float64    `tiny:"listmapfloat"`
 	ListMapString []map[int]string     `tiny:"listmapstring"`
+}
 ```
 
 ### Supports GZIP compression
@@ -39,7 +41,7 @@ s, err = s.SetCompress(true)
 if err != nil {
 	panic(err)
 }
-data := s.Serialize(&mystruct) // Serialized data
+data := s.Serialize(&teststruct) // Serialized data
 ```
 
 And deserialize it like so:
@@ -48,7 +50,7 @@ deserialized := MyStruct{}
 s = NewSerializer()
 s.SetData(serialized)
 s = s.SetCompress(true)
-s.Deserialize(serialized, &deserialized)
+s.Deserialize(serialized, &TestStruct)
 if err != nil {
 	panic(err)
 }
