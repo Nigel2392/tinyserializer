@@ -5,8 +5,6 @@ import (
 )
 
 type Testie struct {
-	Name                 string                 `tiny:"name"`
-	Age                  int64                  `tiny:"age"`
 	Intlist              []int64                `tiny:"intlist"`
 	StringList           []string               `tiny:"stringlist"`
 	Structie             Structie               `tiny:"structie"`
@@ -42,7 +40,6 @@ type AllStruct struct {
 }
 
 type Structie struct {
-	Age             int64       `tiny:"age"`
 	IntList         []int64     `tiny:"intlist"`
 	EmbeddedintList [][]int64   `tiny:"embeddedintlist"`
 	EmbeddedstrList [][]string  `tiny:"embeddedstrlist"`
@@ -83,8 +80,6 @@ var All_S = &AllStruct{
 
 // Create a test struct
 var testStruct = Testie{
-	Name: "John Doe",
-	Age:  30,
 	Intlist: []int64{
 		1,
 		2,
@@ -93,7 +88,6 @@ var testStruct = Testie{
 	},
 	StringList: BasicStringList,
 	Structie: Structie{
-		Age:             30,
 		IntList:         BasicIntList,
 		EmbeddedintList: BasicEmbeddedIntList,
 		EmbeddedstrList: [][]string{
@@ -146,12 +140,6 @@ func TestSerializer(t *testing.T) {
 	t.Log(deserialized)
 
 	// Check if the deserialized struct is equal to the original
-	if deserialized.Name != testStruct.Name {
-		t.Fatal("deserialized struct is not equal to the original")
-	}
-	if deserialized.Age != testStruct.Age {
-		t.Fatal("deserialized struct is not equal to the original")
-	}
 	if len(deserialized.Intlist) == len(testStruct.Intlist) {
 		if deserialized.Intlist[0] != testStruct.Intlist[0] {
 			t.Fatal("deserialized struct is not equal to the original")
@@ -176,9 +164,6 @@ func TestSerializer(t *testing.T) {
 			t.Fatal("deserialized struct is not equal to the original")
 		}
 	} else {
-		t.Fatal("deserialized struct is not equal to the original")
-	}
-	if deserialized.Structie.Age != testStruct.Structie.Age {
 		t.Fatal("deserialized struct is not equal to the original")
 	}
 	if len(deserialized.Structie.IntList) == len(testStruct.Structie.IntList) {
